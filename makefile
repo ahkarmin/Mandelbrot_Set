@@ -17,4 +17,3 @@ run:
 
 clean:
     rm $(TARGET) *.o
-

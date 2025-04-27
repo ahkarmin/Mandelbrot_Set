@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "ComplexPlane.h"
+
 using namespace sf;
 using namespace std;
 
@@ -25,6 +27,7 @@ int main()
 	messageText.setFillColor(Color::Red);
 	messageText.setPosition(10.f, 10.f);
 
+    messageText.setString("Zoom In OR Zoom Out. YOUR CHOICE!!");
 
     while (window.isOpen())
     {
@@ -32,7 +35,7 @@ int main()
         Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event.Closed)
+            if (event.type == Event::Closed)
             {
                 // Quit the game when the window is closed.
                 window.close();
@@ -40,28 +43,53 @@ int main()
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-                    plane.zoomOut();
-                    plane.setCenter(Vector2f(event.mouseButton.x, event.mouseButton.y));
-                }
                 if (event.mouseButton.button == sf::Mouse::Right)
                 {
-
+                    //plane.zoomOut();
+                    //plane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y));
+                    std::cout << "the right button was pressed" << std::endl;
+                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+                }
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    //plane.zoomIn();
+                    //plane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y));
+                    std::cout << "the left button was pressed" << std::endl;
+                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
                 }
             }
+            if (event.type == sf::Event::MouseMoved)
+            {
+                //plane.setMouseLocation(Vector2i(event.mouseButton.x, event.mouseButton.y));
+                std::cout << "Moused Moved!!" << std::endl;
+                std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+            }
         }
+        
+        //  NOT WORKING (Sunday)
         if (Keyboard::isKeyPressed(Keyboard::Escape))
         {
             window.close();
         }
 
-        ///Update
+        /*
+		****************************************
+		Update the scene
+		****************************************
+        */
+        //plane.updateRender();
+        //plane.loadText(messageText);
 
-
-        ///Draw
+        /*
+		****************************************
+		Draw the scene
+		****************************************
+		*/
         window.clear();
-        messageText.setString("Here!!!!");
+        window.draw(plane);
         window.draw(messageText);
         window.display();
     }
