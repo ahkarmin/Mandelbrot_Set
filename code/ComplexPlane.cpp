@@ -53,7 +53,7 @@ void ComplexPlane::updateRender()
                 Vector2f coord = mapPixelToCoords(m_position);
                 size_t iter = countIterations(coord);
                 Uint8 r, g, b;
-                r = 
+
             }
         }
     }
@@ -70,3 +70,5 @@ void ComplexPlane::updateRender()
 // {
 
 // }
+
+//
