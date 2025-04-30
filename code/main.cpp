@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "ComplexPlane.h"
+#include <iostream>
 using namespace sf;
 using namespace std;
 
@@ -12,7 +13,7 @@ int main() {
     ComplexPlane plane(width, height);
 
     Font font;
-    if (!font.loadFromFile("code/KOMIKAP_.ttf"))
+    if (!font.loadFromFile("font/KOMIKAP_.ttf"))
     {
         cerr << "Font file not working." << endl;
         return 0;
@@ -29,8 +30,7 @@ int main() {
                 window.close();
 
             if (event.type == Event::MouseButtonPressed) {
-                Vector2i mousePos = Mouse::getPosition(window);
-                plane.setCenter(mousePos);
+                plane.setCenter(Mouse::getPosition(window));
                 if (event.mouseButton.button == Mouse::Left)
                     plane.zoomIn();
                 else if (event.mouseButton.button == Mouse::Right)
@@ -46,9 +46,11 @@ int main() {
         if (Keyboard::isKeyPressed(Keyboard::Escape))
             window.close();
 
+        // Update
         plane.updateRender();
         plane.loadText(infoText);
 
+        // Draw
         window.clear();
         window.draw(plane);
         window.draw(infoText);
