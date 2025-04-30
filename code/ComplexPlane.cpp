@@ -58,11 +58,14 @@ void ComplexPlane::setMouseLocation(sf::Vector2i mousePixel) {
 }
 
 void ComplexPlane::loadText(sf::Text& text) {
-    std::ostringstream ss;
-    //ss.precision(5);
+    std::stringstream ss;
+    ss.precision(5);
     ss << "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")\n"
        << "Center: (" << m_plane_center.x << ", " << m_plane_center.y << ")\n"
-       << "Zoom Level: " << m_zoomCount;
+       << "Zoom Level: " << m_zoomCount << std::endl
+       << "Left-click to Zoom-in" << std::endl
+       << "Right-click to Zoom-out" << std::endl;
+
     text.setString(ss.str());
 }
 
@@ -78,9 +81,12 @@ size_t ComplexPlane::countIterations(sf::Vector2f coord) {
 }
 
 void ComplexPlane::iterationsToRGB(size_t count, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b) {
-    if (count == MAX_ITER) {
+    if (count == MAX_ITER) 
+    {
         r = g = b = 0;
-    } else {
+    } 
+    else 
+    {
         float t = static_cast<float>(count) / MAX_ITER;
         r = static_cast<sf::Uint8>(9 * (1 - t) * t * t * t * 255);
         g = static_cast<sf::Uint8>(15 * (1 - t) * (1 - t) * t * t * 255);
